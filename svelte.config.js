@@ -1,4 +1,4 @@
-import adapter from "@sveltejs/adapter-vercel";
+import adapter from "@sveltejs/adapter-static";
 import { vitePreprocess } from "@sveltejs/kit/vite";
 import { mdsvex } from "mdsvex";
 import { resolve } from "path";
@@ -7,7 +7,13 @@ import { resolve } from "path";
 export default {
   extensions: [".md", ".svelte"],
   kit: {
-    adapter: adapter(),
+    adapter: adapter({
+       pages: 'build',
+       assets: 'build',
+      fallback: null,
+      precompress: false,
+      strict: true
+    }),
     alias: {
       $components: resolve("src/components"),
       $icons: resolve("src/assets/icons"),
